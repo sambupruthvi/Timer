@@ -20,8 +20,15 @@ class Timer{
     }
 
     tick = () => {
-        this.timerValue = parseFloat(this.durationInput.value) - 1;
-        this.durationInput.value = this.timerValue; 
+        this.timeRemaining = this.timeRemaining - 1;
+    }
+
+    get timeRemaining(){
+        return parseFloat(this.durationInput.value);
+    }
+
+    set timeRemaining(time) {
+        this.durationInput.value = time;
     }
 }
 
