@@ -5,17 +5,18 @@ const circle = document.querySelector("circle");
 const radius = circle.getAttribute("r");
 const perimeter = 2 * Math.PI * radius;
 
+//offset = (perimeter * timeRemaining)/ totalDuration - perimeter
 circle.setAttribute("stroke-dasharray", perimeter);
-const change = perimeter / durationInput.getAttribute("value");
 let offset = 0
+let duration;
 const timer = new Timer(durationInput, playButton, pauseButton, {
-    onStart() {
-    console.log('Timer Started');
+    onStart(totalDuration) {
+        duration = totalDuration;
+        // console.log('Timer Started');
     },
-    onTick() {
+    onTick(timeRemaining) {
         console.log('Timer Started to tick');
-        offset = offset - change;
-        circle.setAttribute("stroke-dashoffset", offset);
+        circle.setAttribute("stroke-dashoffset", ((perimeter * timeRemaining) / duration - perimeter));
     },
     onComplete() {
         console.log('Timer Stopped');

@@ -18,10 +18,10 @@ class Timer{
     start = () => {
         this.tick();
         if (this.onStart) {
-            this.onStart();   
+            this.onStart(this.timeRemaining);   
         }
         //The returned intervalID is a numeric, non-zero value which identifies the timer created by the call to setInterval()
-        this.intervalId = setInterval(this.tick, 1000);
+        this.intervalId = setInterval(this.tick, 50);
     }
 
     pause = () => {
@@ -36,9 +36,9 @@ class Timer{
                 this.onComplete();
             }
         } else {
-            this.timeRemaining = this.timeRemaining - 1;
+            this.timeRemaining = this.timeRemaining - .05;
             if (this.onTick) {
-                this.onTick(); 
+                this.onTick(this.timeRemaining); 
             }
         }    
     }
@@ -48,6 +48,6 @@ class Timer{
     }
 
     set timeRemaining(time) {
-        this.durationInput.value = time;
+        this.durationInput.value = time.toFixed(2);
     }
 } 
